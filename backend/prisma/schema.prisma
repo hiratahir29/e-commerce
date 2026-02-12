@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Product  {
+    id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    name  String
+    description String
+    price Decimal @default(0) @db.Decimal(10,2)
+    currency  String
+    category  String
+    image String
+    rating  Decimal  @default(0) @db.Decimal(2,1)
+    quantity  Int @default(0)
+    inStock Boolean @default(false)
+    comments  Comment[]
+  }
+
+  model Comment {
+    id  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    name String
+    comment String
+    rating Decimal  @default(0) @db.Decimal(2,1)
+    productId String @db.Uuid
+    product   Product @relation(fields: [productId], references: [id])
+  }
