@@ -8,6 +8,7 @@ import CartPage from "./pages/CartPage";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import ProductDetails from "./components/ProductDetails";
+import LoginPage from "./components/LoginPage";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path="/" element={<Dashboard/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
           <Route path="/cart" element={<CartPage/>}/>
           <Route path="/products/:id" element={<ProductDetails/>}/>
         </Routes>

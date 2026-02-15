@@ -1,6 +1,21 @@
 // data/dummyData.js
 
-export const products = [
+export const sample_data = {
+  users: [
+    {
+      name: "John Wick",
+      email: "john@gmail.com",
+      password: "123456",
+      role: "admin"
+    },
+     {
+      name: "Hira",
+      email: "hira@gmail.com",
+      password: "123456",
+      role: "user"
+    }
+  ],
+  products:  [
   {
     name: "Gaming Laptop",
     description: "High performance laptop for gaming",
@@ -90,4 +105,5 @@ export const products = [
       },
     ],
   },
-];
+]
+}

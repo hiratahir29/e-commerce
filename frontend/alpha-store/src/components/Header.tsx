@@ -44,8 +44,8 @@ const Header = () => {
   }, [debouncedFetch]);
 
   return (
-    <header className="sticky top-0 z-50 bg-gray-200 border-b border-gray-200">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 bg-gray-200 border-b border-gray-200 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"> 
         <div className="flex h-16 items-center justify-between">
           
           {/* Logo */}
@@ -77,9 +77,9 @@ const Header = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <button className="text-sm font-medium text-gray-700 hover:text-black">
+            <Link to={'/login'} className="text-sm font-medium text-gray-700 hover:text-black">
               Login
-            </button>
+            </Link>
 
             <Link to={'/cart'} className="rounded-lg bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-gray-800 transition">
               Cart {items.length?total :""}

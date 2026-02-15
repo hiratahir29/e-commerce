@@ -68,7 +68,11 @@ export const JsonNull = runtime.JsonNull;
 export const AnyNull = runtime.AnyNull;
 export const ModelName = {
     Product: 'Product',
-    Comment: 'Comment'
+    Comment: 'Comment',
+    User: 'User',
+    Account: 'Account',
+    Session: 'Session',
+    VerificationToken: 'VerificationToken'
 };
 /**
  * Enums
@@ -98,12 +102,65 @@ export const CommentScalarFieldEnum = {
     rating: 'rating',
     productId: 'productId'
 };
+export const UserScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    emailVerified: 'emailVerified',
+    image: 'image',
+    password: 'password',
+    role: 'role',
+    address: 'address',
+    paymentMethod: 'paymentMethod',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+export const AccountScalarFieldEnum = {
+    userId: 'userId',
+    type: 'type',
+    provider: 'provider',
+    providerAccountId: 'providerAccountId',
+    refresh_token: 'refresh_token',
+    access_token: 'access_token',
+    expires_at: 'expires_at',
+    token_type: 'token_type',
+    scope: 'scope',
+    id_token: 'id_token',
+    session_state: 'session_state',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+export const SessionScalarFieldEnum = {
+    sessionToken: 'sessionToken',
+    userId: 'userId',
+    expires: 'expires',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+export const VerificationTokenScalarFieldEnum = {
+    identifier: 'identifier',
+    token: 'token',
+    expires: 'expires'
+};
 export const SortOrder = {
     asc: 'asc',
     desc: 'desc'
 };
+export const NullableJsonNullValueInput = {
+    DbNull: DbNull,
+    JsonNull: JsonNull
+};
 export const QueryMode = {
     default: 'default',
     insensitive: 'insensitive'
+};
+export const JsonNullValueFilter = {
+    DbNull: DbNull,
+    JsonNull: JsonNull,
+    AnyNull: AnyNull
+};
+export const NullsOrder = {
+    first: 'first',
+    last: 'last'
 };
 export const defineExtension = runtime.Extensions.defineExtension;

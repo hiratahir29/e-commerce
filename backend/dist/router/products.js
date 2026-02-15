@@ -3,10 +3,11 @@ const router = express.Router();
 import "dotenv/config";
 import { PrismaClient } from "../generated/prisma/client.js";
 import { PrismaPg } from '@prisma/adapter-pg';
+import { authenticateToken } from './authMiddleware.js';
 const connectionString = `${process.env.DATABASE_URL}`;
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
-router.get('/getProducts', async (req, res) => {
+router.get('/getProducts', authenticateToken, async (req, res) => {
     const data = await prisma.product.findMany({
         take: 5,
         orderBy: { price: 'asc' },
