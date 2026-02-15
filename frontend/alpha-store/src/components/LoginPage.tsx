@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUserLoginMutation } from "../api/auth";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,7 @@ const LoginPage = () => {
   //@ts-ignore
   const [login, { isLoading, error }] = useUserLoginMutation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,9 +21,9 @@ const LoginPage = () => {
       // result = backend response
       // Example:
       // { user: {...}, accessToken: "xyz" }
-
+      console.log(result);
       dispatch(setAccessToken(result.token));
-
+      navigate('/')
       console.log("Login success");
     } catch (err) {
       console.error("Login failed", err);

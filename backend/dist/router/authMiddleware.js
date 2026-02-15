@@ -6,7 +6,8 @@ export function authenticateToken(req, res, next) {
         return res.sendStatus(401);
     const verifyRes = verifyAccessToken(token);
     console.log(verifyRes);
-    // if (verifyRes) return res.sendStatus(403);
-    //   req.user = user;
+    if (!verifyRes)
+        return res.sendStatus(403);
+    //   req.user = verifyRes.user;
     next();
 }

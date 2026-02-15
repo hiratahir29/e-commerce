@@ -9,7 +9,7 @@ export function authenticateToken(req: any, res: any, next: any) {
   
     const verifyRes = verifyAccessToken(token);
     console.log(verifyRes);
-    if (verifyRes) return res.sendStatus(403);
+    if (!verifyRes) return res.sendStatus(403);
     //   req.user = verifyRes.user;
     next();
 }

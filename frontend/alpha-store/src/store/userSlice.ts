@@ -4,7 +4,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 export interface User {
     name: string;
     image: string;
-    token: string;
+    accessToken: string;
     email: string
 }
 
@@ -12,16 +12,16 @@ export interface User {
 const initialState: User = {
     name: "",
     image: "",
-    token: "",
+    accessToken: "",
     email: ""
 }
 
 const user = createSlice({
-    name: 'product',
+    name: 'user',
     initialState,
     reducers:{
-        setAccessToken(state, action: PayloadAction<User>){    
-            state.token = action.payload.token;
+        setAccessToken(state, action: PayloadAction<string>){    
+            state.accessToken = action.payload;
         }
     }
 })
