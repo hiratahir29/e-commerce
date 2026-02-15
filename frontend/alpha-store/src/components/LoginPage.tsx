@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUserLoginMutation } from "../api/auth";
 import { useDispatch } from "react-redux";
-import { setAccessToken } from "../store/userSlice";
+import { setAccessToken, setIsLoggedIn } from "../store/userSlice";
 
 
 const LoginPage = () => {
@@ -21,7 +21,7 @@ const LoginPage = () => {
       // result = backend response
       // Example:
       // { user: {...}, accessToken: "xyz" }
-      console.log(result);
+      dispatch(setIsLoggedIn(true));
       dispatch(setAccessToken(result.token));
       navigate('/')
       console.log("Login success");

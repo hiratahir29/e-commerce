@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useMemo, useState, type ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import debounce from "lodash/debounce";
-import { setProductLoading, setSearchQuery } from "../store/productsSlice";
+import { loadAllProducts, setProductLoading, setSearchQuery } from "../store/productsSlice";
+import { logout } from "../store/userSlice";
 
 const Header = () => {
 
   const items = useSelector((state: any) => state.cart.items);
-
+  const isLoggedIn = useSelector((state: any) => state.user.isLoggedIn)
   const total = useMemo(()=>{
     return items.reduce((acc: any, cur: any) => {
         acc += cur.quantity;
@@ -16,6 +17,7 @@ const Header = () => {
   },[items]);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
    const [inputValue, setInputValue] = useState('');
   const fetchSearchResults = useCallback((query: string) => {
@@ -35,6 +37,15 @@ const Header = () => {
     setInputValue(event.target.value);
     debouncedFetch(event.target.value);
   };
+
+ 
+    
+    const handleLogout = () => {
+      dispatch(logout());
+      dispatch(loadAllProducts([]));
+      navigate("/"); // optional redirect
+    };
+      
 
  
   useEffect(() => {
@@ -77,9 +88,21 @@ const Header = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <Link to={'/login'} className="text-sm font-medium text-gray-700 hover:text-black">
+            {!isLoggedIn ? (
+            <Link
+              to="/login"
+              className="text-sm font-medium text-gray-700 hover:text-black"
+            >
               Login
             </Link>
+          ) : (
+            <button
+              onClick={handleLogout}
+              className="text-sm font-medium text-gray-700 hover:text-black"
+            >
+              Logout
+            </button>
+          )}
 
             <Link to={'/cart'} className="rounded-lg bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-gray-800 transition">
               Cart {items.length?total :""}

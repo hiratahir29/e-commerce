@@ -48,7 +48,7 @@ const productSlice = createSlice({
         setProductLoading(state, action: PayloadAction<boolean>){
             // console.log(action.payload)
             state.productLoading = action.payload;
-        },
+        }
     }
 })
 
