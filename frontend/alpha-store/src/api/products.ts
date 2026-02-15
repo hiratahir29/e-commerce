@@ -1,10 +1,9 @@
 
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {api} from './api';
 
 
-export const productsApi = createApi({
-  reducerPath: 'products',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://e-commerce-weld-eight-83.vercel.app/' }),
+
+export const productsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query<any,void>({
       query: () => `getProducts`,

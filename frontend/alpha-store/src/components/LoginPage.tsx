@@ -1,13 +1,32 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useUserLoginMutation } from "../api/auth";
+import { useDispatch } from "react-redux";
+import { setAccessToken } from "../store/userSlice";
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  //@ts-ignore
+  const [login, { isLoading, error }] = useUserLoginMutation();
+  const dispatch = useDispatch();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ email, password });
+    try {
+      const result = await login({ email, password }).unwrap();
+
+      // result = backend response
+      // Example:
+      // { user: {...}, accessToken: "xyz" }
+
+      dispatch(setAccessToken(result.token));
+
+      console.log("Login success");
+    } catch (err) {
+      console.error("Login failed", err);
+    }
   };
 
   return (
