@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import debounce from "lodash/debounce";
 import { loadAllProducts, setProductLoading, setSearchQuery } from "../store/productsSlice";
-import { logout } from "../store/userSlice";
+import { logout, setAccessToken } from "../store/userSlice";
 
 const Header = () => {
 
@@ -41,8 +41,11 @@ const Header = () => {
  
     
     const handleLogout = () => {
+      dispatch(setAccessToken(""))
       dispatch(logout());
       dispatch(loadAllProducts([]));
+      // dispatch(clearCart());
+      // localStorage.clear();
       navigate("/"); // optional redirect
     };
       
